@@ -8,11 +8,11 @@
 
 <table>
 <tr>
-<td width="180"><a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE"><b>CapybaraCode</b></a></td>
+<td width="180"><a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE"><img src="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/capybaracode.png" alt="CapybaraCode" width="150"></a></td>
 <td>感谢 <a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE">CapybaraCode</a> 赞助本项目 —— 这是本项目收到的第一笔赞助，感谢这份认可！<br>稳定、低延迟的 Claude Code / AI 编码 API 中转服务，开箱即用、按量计费，日常写代码足够顺手。注册时填写优惠码 <code>WULABING</code> 可额外获得 <b>4 美元</b>额度。</td>
 </tr>
 <tr>
-<td width="180"><a href="https://www.uhdnow.com/signup?invite=IMAX4K"><b>UHDNOW</b></a></td>
+<td width="180"><a href="https://www.uhdnow.com/signup?invite=IMAX4K"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/uhdnow-dark.png"><img src="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/uhdnow.png" alt="UHDNOW" width="150"></picture></a></td>
 <td>感谢 <a href="https://www.uhdnow.com/signup?invite=IMAX4K">UHDNOW</a> 赞助本项目！<br>一个用心维护的 Emby 私服，4K / IMAX 原盘、杜比视界与 HDR 片源齐全，多线路直连、拖拉即播，喜欢折腾影音的朋友可以去看看。</td>
 </tr>
 </table>
