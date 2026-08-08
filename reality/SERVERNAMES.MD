@@ -1,6 +1,7 @@
-## 已知可用的 SERVERNAMES 及 DEST 列表
+**English** | [简体中文](SERVERNAMES_ZH.MD)
 
-| DEST              | SERVERMANES                    | 说明                                 |
-|-------------------|--------------------------------|------------------------------------|
-| www.apple.com:443 | images.apple.com www.apple.com | Apple 使用了 akamai CDN，全球各地存在节点，并且知名 |
-    
+## Known-Good SERVERNAMES and DEST List
+
+| DEST              | SERVERNAMES                    | Notes                                                                       |
+|-------------------|--------------------------------|-----------------------------------------------------------------------------|
+| www.apple.com:443 | images.apple.com www.apple.com | Apple uses the Akamai CDN, which has nodes worldwide and is well known |

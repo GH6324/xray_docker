@@ -1,43 +1,45 @@
+**English** | [简体中文](README_ZH.MD)
+
 ## xray_docker_reality
 
-XRay VLESS-Reality Docker 镜像，支持 tcp（vision）、xhttp、后置代理以及self-steal。
+XRay VLESS-Reality Docker image, supporting tcp (vision), xhttp, an upstream (outbound) proxy and self-steal.
 
 [![xray_docker_reality_docker_image_build](https://github.com/wulabing/xray_docker/actions/workflows/xray_docker_reality.yml/badge.svg)](https://github.com/wulabing/xray_docker/actions/workflows/xray_docker_reality.yml)
 
-> 镜像每两天 UTC+8 04:00 自动构建。
+> The image is rebuilt automatically every two days at 04:00 UTC+8.
 
-> 还没有 VPS？可通过我的 AFF 购买：[搬瓦工](https://bandwagonhost.com/aff.php?aff=63939) / [DMIT](https://www.dmit.io/aff.php?aff=3957) / [Vultr](https://www.vultr.com/?ref=6881279) / [nube 按量付费](https://nube.sh/invite/5986088028ENM0)
+> No VPS yet? You can buy one through my affiliate links: [BandwagonHost](https://bandwagonhost.com/aff.php?aff=63939) / [DMIT](https://www.dmit.io/aff.php?aff=3957) / [Vultr](https://www.vultr.com/?ref=6881279) / [nube pay-as-you-go](https://nube.sh/invite/5986088028ENM0)
 
-## ❤️ 赞助商
+## ❤️ Sponsors
 
-> 想出现在这里？欢迎通过 issue 或 [Telegram 群组](https://t.me/wulabing_v2ray) 联系我
+> Want to appear here? Feel free to reach out via an issue or the [Telegram group](https://t.me/wulabing_v2ray)
 
 <table>
 <tr>
 <td width="180"><a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE"><img src="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/capybaracode.png" alt="CapybaraCode" width="150"></a></td>
-<td>感谢 <a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE">CapybaraCode</a> 赞助本项目 —— 这是本项目收到的第一笔赞助，感谢这份认可！<br>稳定、低延迟的 Claude Code / AI 编码 API 中转服务，开箱即用、按量计费，日常写代码足够顺手。注册时填写优惠码 <code>WULABING</code> 可额外获得 <b>4 美元</b>额度。</td>
+<td>Thanks to <a href="https://api.capybaracode.cc/register?aff=ENZE8PZ2VBDE">CapybaraCode</a> for sponsoring this project — the very first sponsorship this project has received, and I truly appreciate the recognition!<br>A stable, low-latency API relay service for Claude Code / AI coding. Works out of the box, pay-as-you-go, and smooth enough for daily coding work. Enter the promo code <code>WULABING</code> when signing up to get an extra <b>$4</b> in credit.</td>
 </tr>
 <tr>
 <td width="180"><a href="https://www.uhdnow.com/signup?invite=IMAX4K"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/uhdnow-dark.png"><img src="https://raw.githubusercontent.com/wulabing/xray_docker/master/image/sponsors/uhdnow.png" alt="UHDNOW" width="150"></picture></a></td>
-<td>感谢 <a href="https://www.uhdnow.com/signup?invite=IMAX4K">UHDNOW</a> 赞助本项目！<br>一个用心维护的 Emby 私服，4K / IMAX 原盘、杜比视界与 HDR 片源齐全，多线路直连、拖拉即播，喜欢折腾影音的朋友可以去看看。</td>
+<td>Thanks to <a href="https://www.uhdnow.com/signup?invite=IMAX4K">UHDNOW</a> for sponsoring this project!<br>A carefully maintained private Emby server with a full catalogue of 4K / IMAX remuxes, Dolby Vision and HDR sources, multiple direct-connect routes and instant seeking. Worth a look if you are into home media.</td>
 </tr>
 </table>
 
-## 懒人一键安装
+## One-Line Install
 
 ```
 EXTERNAL_PORT=2333 && docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p $EXTERNAL_PORT:443 -e EXTERNAL_PORT=$EXTERNAL_PORT wulabing/xray_docker_reality:latest && sleep 3 && docker exec -it xray_reality cat /config_info.txt
 ```
 
-## 快速开始
+## Quick Start
 
-未安装 Docker 时：
+If Docker is not installed yet:
 
 ```
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
 
-**端口映射**（`EXTERNAL_PORT` 为宿主机对外端口）：
+**Port mapping** (`EXTERNAL_PORT` is the port exposed on the host):
 
 ```
 docker pull wulabing/xray_docker_reality:latest
@@ -45,7 +47,7 @@ EXTERNAL_PORT=443
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p $EXTERNAL_PORT:443 -e EXTERNAL_PORT=$EXTERNAL_PORT wulabing/xray_docker_reality:latest
 ```
 
-**host 模式**（使用 `HOSTMODE_PORT`，`EXTERNAL_PORT` 不生效）：
+**host mode** (use `HOSTMODE_PORT`; `EXTERNAL_PORT` has no effect):
 
 ```
 docker pull wulabing/xray_docker_reality:latest
@@ -53,7 +55,7 @@ HOSTMODE_PORT=443
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 --network host -e HOSTMODE_PORT=$HOSTMODE_PORT wulabing/xray_docker_reality:latest
 ```
 
-**持久化配置（推荐）**：挂载 `./wulabing_xray_config:/data`，更新镜像后 UUID/密钥/订阅不变。旧版 `config_info.txt`、`xhttp_reality_state.json` 等文件名会自动兼容读取。
+**Persistent configuration (recommended)**: mount `./wulabing_xray_config:/data` so that the UUID, keys and subscription stay the same after updating the image. Legacy file names such as `config_info.txt` and `xhttp_reality_state.json` are still read automatically.
 
 ```
 docker pull wulabing/xray_docker_reality:latest
@@ -61,36 +63,36 @@ EXTERNAL_PORT=443
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p $EXTERNAL_PORT:443 -e EXTERNAL_PORT=$EXTERNAL_PORT -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-## 获取配置信息
+## Retrieving the Connection Info
 
 ```
 docker logs -f xray_reality
 ```
 
-## 进阶配置
+## Advanced Configuration
 
-**自定义 Reality 参数**（需自行保证参数正确；多个 `SERVERNAMES` 用空格分隔）：
+**Custom Reality parameters** (you are responsible for their correctness; separate multiple `SERVERNAMES` with spaces):
 
 ```
 EXTERNAL_PORT=443
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p $EXTERNAL_PORT:443 -e EXTERNAL_PORT=$EXTERNAL_PORT -e UUID="XXX" -e SERVERNAMES="www.apple.com images.apple.com" -e DEST="www.apple.com:443" -e PRIVATEKEY="XXX" -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-**xhttp 模式**：`NETWORK=xhttp`（默认 `tcp` 为 vless-vision）。`XHTTP_PATH` 未设置时随机生成。
+**xhttp mode**: `NETWORK=xhttp` (the default `tcp` means vless-vision). `XHTTP_PATH` is generated randomly when not set.
 
 ```
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p 443:443 -e NETWORK=xhttp -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-**shortId**：`SHORTIDS` 为空格分隔的 hex（偶数长度、≤16）。不设置时留空；仅非空时在订阅链接附加 `&sid=`。
+**shortId**: `SHORTIDS` is a space-separated list of hex strings (even length, ≤16). Left empty when not set; `&sid=` is appended to the subscription link only when it is non-empty.
 
 ```
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p 443:443 -e SHORTIDS="6ba85179e30d4fc2" -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-**后置代理**：`PROXY` 为 `socks5://` 或 `http://` URL（可含账密）。启用后除 `geoip:cn`、`geoip:private`、`bittorrent` 外，其余出站走上游代理。主要用于链式代理纯净家宽 IP，用于解锁 Netflix 流媒体及 AI 使用/付款场景
+**Upstream proxy**: `PROXY` is a `socks5://` or `http://` URL (credentials may be included). Once enabled, all outbound traffic goes through the upstream proxy except `geoip:cn`, `geoip:private` and `bittorrent`. This is mainly used for proxy chaining through a clean residential IP, to unblock Netflix and other streaming services, and for AI usage / payment scenarios.
 
-> 推荐家宽代理（AFF）：[Proxy-Cheap](https://app.proxy-cheap.com/r/Pbqf9l) / [IPRoyal](https://iproyal.cn/?r=249487)，购买 socks5/http 家宽代理后填入 `PROXY` 即可
+> Recommended residential proxies (affiliate): [Proxy-Cheap](https://app.proxy-cheap.com/r/Pbqf9l) / [IPRoyal](https://iproyal.cn/?r=249487) — buy a socks5/http residential proxy and put it in `PROXY`
 
 ```
 # socks5
@@ -100,19 +102,19 @@ docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p 443:443 -e PROXY="http://user:pass@10.0.0.1:8080" wulabing/xray_docker_reality:latest
 ```
 
-**偷自己（self-steal）**：设置 `DOMAIN` 后内置 Caddy 为该域名签 Let's Encrypt 证书并托管站点，`DEST`/`SERVERNAMES` 由域名自动接管。需 DNS 指向本机，并映射 **80 与 443**；首次签发证书需等待数秒至数十秒。可与 `NETWORK=xhttp`、`SHORTIDS`、`PROXY` 组合使用。
+**Self-steal**: once `DOMAIN` is set, the built-in Caddy issues a Let's Encrypt certificate for that domain and serves the site, and `DEST`/`SERVERNAMES` are taken over by the domain automatically. DNS must point to this machine and **both 80 and 443** must be mapped; the first certificate issuance takes anywhere from a few seconds to a few dozen seconds. Can be combined with `NETWORK=xhttp`, `SHORTIDS` and `PROXY`.
 
 ```
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p 443:443 -p 80:80 -e DOMAIN="your.domain.com" -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-> **建议自定义伪装站点以提升隐蔽性**——挂载自己的静态站点目录到 `/srv/www` 即可覆盖默认页：
+> **Customising the decoy site is recommended for better camouflage** — mount your own static site directory to `/srv/www` to override the default page:
 
 ```
 docker run -d --name xray_reality --restart=always --log-opt max-size=100m --log-opt max-file=3 -p 443:443 -p 80:80 -e DOMAIN="your.domain.com" -v "./my_site:/srv/www" -v "./wulabing_xray_config:/data" wulabing/xray_docker_reality:latest
 ```
 
-**多实例**：不同 `--name` 与端口，避免冲突。
+**Multiple instances**: use different `--name` values and ports to avoid conflicts.
 
 ```
 EXTERNAL_PORT=444
@@ -122,45 +124,45 @@ EXTERNAL_PORT=445
 docker run -d --name xray_reality_2 --restart=always --log-opt max-size=100m --log-opt max-file=3 -p $EXTERNAL_PORT:443 -e EXTERNAL_PORT=$EXTERNAL_PORT wulabing/xray_docker_reality:latest
 ```
 
-**删除容器**：将 `xray_reality` 替换为实际容器名。
+**Removing the container**: replace `xray_reality` with the actual container name.
 
 ```
 docker rm -f xray_reality
 ```
 
-## 环境变量
+## Environment Variables
 
-* UUID：XRay 的唯一用户标识符。若未设置，脚本将自动生成一个随机 UUID。
-* DEST：目标地址。默认值为 www.apple.com:443。（偷自己模式下由 DOMAIN 自动接管）
-* SERVERNAMES：服务器名称列表（空格分隔）。默认值为 www.apple.com images.apple.com。（偷自己模式下由 DOMAIN 自动接管）
-* PRIVATEKEY：私钥。若未设置，脚本将自动生成一个新的私钥和对应的公钥。
-* NETWORK：网络类型，`tcp`（vless-vision）或 `xhttp`。默认值为 tcp。
-* XHTTP_PATH：xhttp 模式的路径，仅 NETWORK=xhttp 生效。未设置时随机生成。
-* SHORTIDS：reality shortId（空格分隔可多个，hex/偶数长度/≤16）。默认留空。
-* PROXY：后置代理 URL，`socks5://[user:pass@]host:port` 或 `http://[user:pass@]host:port`。默认不启用。（家宽代理推荐见「后置代理」章节）
-* DOMAIN：偷自己模式的自有域名，设置后自动启用内置 Caddy 自建站。默认不启用。
-* ACME_EMAIL：偷自己模式下 ACME 证书注册邮箱（可选）。
-* EXTERNAL_PORT：端口映射模式对外端口。默认 443。
-* HOSTMODE_PORT：host 模式端口。
-* CONFIG_DIR：持久化目录。默认值为 /data。
+* UUID: the unique user identifier for XRay. If not set, the script generates a random UUID.
+* DEST: the destination address. Defaults to www.apple.com:443. (Taken over by DOMAIN in self-steal mode.)
+* SERVERNAMES: the list of server names (space-separated). Defaults to www.apple.com images.apple.com. (Taken over by DOMAIN in self-steal mode.)
+* PRIVATEKEY: the private key. If not set, the script generates a new private key and its matching public key.
+* NETWORK: the network type, `tcp` (vless-vision) or `xhttp`. Defaults to tcp.
+* XHTTP_PATH: the path for xhttp mode; only effective when NETWORK=xhttp. Generated randomly when not set.
+* SHORTIDS: reality shortId (space-separated for multiple values; hex, even length, ≤16). Empty by default.
+* PROXY: the upstream proxy URL, `socks5://[user:pass@]host:port` or `http://[user:pass@]host:port`. Disabled by default. (See the "Upstream proxy" section for residential proxy recommendations.)
+* DOMAIN: your own domain for self-steal mode; setting it automatically enables the built-in Caddy site. Disabled by default.
+* ACME_EMAIL: the ACME certificate registration email for self-steal mode (optional).
+* EXTERNAL_PORT: the external port in port-mapping mode. Defaults to 443.
+* HOSTMODE_PORT: the port in host mode.
+* CONFIG_DIR: the persistence directory. Defaults to /data.
 
-## 常量
+## Constants
 
-* flow：xtls-rprx-vision（tcp 模式）/ 留空（xhttp 模式）
-* security：reality
+* flow: xtls-rprx-vision (tcp mode) / empty (xhttp mode)
+* security: reality
 
-## 注意事项
+## Notes
 
-请确保在使用前已正确安装和配置 XRay 客户端。
-为了保证安全和稳定，请勿将 UUID、私钥等敏感信息泄露给他人。
-容器默认限制日志大小（`max-size=100m`、`max-file=3`），可按需调整。
+Make sure the XRay client is properly installed and configured before use.
+For security and stability, never share sensitive information such as your UUID or private key with anyone.
+The container limits log size by default (`max-size=100m`, `max-file=3`); adjust as needed.
 
-## 支持这个项目
+## Support This Project
 
-如果您想支持我，可以走我的 AFF 购买服务器 / 代理：
+If you would like to support me, you can buy servers / proxies through my affiliate links:
 
-**服务器 / 代理：** [搬瓦工](https://bandwagonhost.com/aff.php?aff=63939) · [JustMySocks](https://justmysocks.net/members/aff.php?aff=17621) · [DMIT](https://www.dmit.io/aff.php?aff=3957) · [Nube.sh（按量付费）](https://nube.sh/invite/5986088028ENM0) · [Vultr](https://www.vultr.com/?ref=6881279)
+**Servers / proxies:** [BandwagonHost](https://bandwagonhost.com/aff.php?aff=63939) · [JustMySocks](https://justmysocks.net/members/aff.php?aff=17621) · [DMIT](https://www.dmit.io/aff.php?aff=3957) · [Nube.sh (pay-as-you-go)](https://nube.sh/invite/5986088028ENM0) · [Vultr](https://www.vultr.com/?ref=6881279)
 
-**socks5 / http 家宽代理：** [Proxy-Cheap](https://app.proxy-cheap.com/r/Pbqf9l) · [IPRoyal](https://iproyal.cn/?r=249487)
+**socks5 / http residential proxies:** [Proxy-Cheap](https://app.proxy-cheap.com/r/Pbqf9l) · [IPRoyal](https://iproyal.cn/?r=249487)
 
-也可以通过 USDT 支持我，感谢您的支持 —— TRC20：`TU8mLTPfa5Y9nmszyfyt2VRAtuZhdLexL8`
+You can also support me with USDT — thank you for your support — TRC20: `TU8mLTPfa5Y9nmszyfyt2VRAtuZhdLexL8`
